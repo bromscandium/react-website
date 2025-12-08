@@ -12,12 +12,15 @@ export const AppRouter = () => {
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route path="/react-website/" element={<Home />} />
+        <Route path="/react-website/settings" element={<Settings />} />
         <Route element={<Tabs />}>
-          <Route path="/weather" element={<Weather />} />
-          <Route path="/day-forecast" element={<DayForecast />} />
-          <Route path="/week-forecast" element={<WeekForecast />} />
+          <Route path="/react-website/weather" element={<Weather />} />
+          <Route path="/react-website/day-forecast" element={<DayForecast />} />
+          <Route
+            path="react-website/week-forecast"
+            element={<WeekForecast />}
+          />
         </Route>
       </Routes>
     </Router>

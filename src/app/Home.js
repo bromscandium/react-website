@@ -57,9 +57,12 @@ export const Home = () => {
         setLastLocations([locationData, ...lastLocations].slice(0, 10));
       }
 
-      navigate(`/weather?city=${encodeURIComponent(weatherData.name)}`, {
-        state: { weatherData },
-      });
+      navigate(
+        `/react-website/weather?city=${encodeURIComponent(weatherData.name)}`,
+        {
+          state: { weatherData },
+        },
+      );
     } catch (err) {
       console.error("Error fetching weather:", err);
       setError("Something went wrong. Please try again.");
@@ -69,9 +72,12 @@ export const Home = () => {
   };
 
   const handleLocationSelect = (location) => {
-    navigate(`/weather?city=${encodeURIComponent(location.city)}`, {
-      state: { weatherData: location.weatherData },
-    });
+    navigate(
+      `/react-website/weather?city=${encodeURIComponent(location.city)}`,
+      {
+        state: { weatherData: location.weatherData },
+      },
+    );
   };
 
   const handleLocationDelete = (locationId) => {

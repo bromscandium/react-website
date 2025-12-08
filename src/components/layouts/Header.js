@@ -10,7 +10,7 @@ export const Header = () => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
 
-  const isSettings = location.pathname === "/settings";
+  const isSettings = location.pathname === "/react-website/settings";
   const city = searchParams.get("city");
 
   return (
@@ -19,7 +19,7 @@ export const Header = () => {
         {isSettings ? (
           <CancelButton onClick={() => navigate(-1)} />
         ) : (
-          <SettingsButton onClick={() => navigate("/settings")} />
+          <SettingsButton onClick={() => navigate("/react-website/settings")} />
         )}
       </div>
 

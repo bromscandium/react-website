@@ -17,7 +17,7 @@ export const ForecastCard = ({
 
   const handleClick = () => {
     navigate(
-      `/weather?city=${encodeURIComponent(city)}&timestamp=${timestamp}`,
+      `/react-website/weather?city=${encodeURIComponent(city)}&timestamp=${timestamp}`,
     );
   };
 
