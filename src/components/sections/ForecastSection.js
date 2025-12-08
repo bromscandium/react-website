@@ -3,10 +3,14 @@ import { ArrowLeftIcon } from "../icons/ArrowLeftIcon";
 import { ArrowRightIcon } from "../icons/ArrowRightIcon";
 import { ForecastCard } from "../cards/ForecastCard";
 import "./styles/ForecastSection.css";
+import { useIconSize } from "../../hooks/useIconSize";
 
 export const ForecastSection = ({ forecastData, city, formatLabel }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(3);
+
+  const iconSize = useIconSize(24, 12);
+
   const scrollContainerRef = useRef(null);
 
   useEffect(() => {
@@ -47,7 +51,7 @@ export const ForecastSection = ({ forecastData, city, formatLabel }) => {
           onClick={scrollLeft}
           disabled={!canScrollLeft}
         >
-          <ArrowLeftIcon />
+          <ArrowLeftIcon width={iconSize} height={iconSize} />
         </button>
 
         <div className="forecast-scroll" ref={scrollContainerRef}>
@@ -71,7 +75,7 @@ export const ForecastSection = ({ forecastData, city, formatLabel }) => {
           onClick={scrollRight}
           disabled={!canScrollRight}
         >
-          <ArrowRightIcon />
+          <ArrowRightIcon width={iconSize} height={iconSize} />
         </button>
       </div>
     </div>

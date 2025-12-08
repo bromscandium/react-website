@@ -6,3 +6,9 @@
   cursor: pointer;
   user-select: none;
 }
+
+@media (max-width: 540px) {
+  .city-button {
+    font-size: var(--font-size-lg);
+  }
+}

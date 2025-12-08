@@ -32,3 +32,15 @@
 .quality-poor {
   color: var(--color-error);
 }
+
+@media (max-width: 540px) {
+  .weather-info {
+    padding: 0 var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .info-label,
+  .info-value {
+    font-size: var(--font-size-sm);
+  }
+}

@@ -18,3 +18,18 @@
   margin: 0;
   line-height: 1.6;
 }
+
+@media (max-width: 540px) {
+  .tip-info {
+    padding: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+  }
+
+  .tip-title {
+    font-size: var(--font-size-sm);
+  }
+
+  .tip-text {
+    font-size: 12px;
+  }
+}

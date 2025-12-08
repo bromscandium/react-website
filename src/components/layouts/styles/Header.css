@@ -28,3 +28,18 @@
   font-weight: var(--font-weight-medium);
   color: var(--color-text-primary);
 }
+
+@media (max-width: 540px) {
+  .header {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .header-title {
+    font-size: var(--font-size-lg);
+  }
+
+  .header-left,
+  .header-right {
+    min-width: 32px;
+  }
+}

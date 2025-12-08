@@ -4,12 +4,15 @@ import "./styles/LastLocationSection.css";
 import { ArrowRightIcon } from "../icons/ArrowRightIcon";
 import { ArrowLeftIcon } from "../icons/ArrowLeftIcon";
 import { getWeatherIcon } from "../../helpers/weatherIcon";
+import { useIconSize } from "../../hooks/useIconSize";
 
 export const LastLocationSection = ({ locations, onSelect, onDelete }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(3);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const iconSize = useIconSize(24, 12);
 
   const scrollContainerRef = useRef(null);
 
@@ -68,7 +71,7 @@ export const LastLocationSection = ({ locations, onSelect, onDelete }) => {
             className="carousel-arrow carousel-arrow-left"
             onClick={scrollLeft}
           >
-            <ArrowLeftIcon width={20} height={20} />
+            <ArrowLeftIcon width={iconSize} height={iconSize} />
           </button>
         )}
 
@@ -104,7 +107,7 @@ export const LastLocationSection = ({ locations, onSelect, onDelete }) => {
             className="carousel-arrow carousel-arrow-right"
             onClick={scrollRight}
           >
-            <ArrowRightIcon width={20} height={20} />
+            <ArrowRightIcon width={iconSize} height={iconSize} />
           </button>
         )}
       </div>

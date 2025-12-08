@@ -71,3 +71,32 @@
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
 }
+
+@media (max-width: 540px) {
+  .location-card {
+    min-width: 160px;
+    max-width: 160px;
+    padding: var(--spacing-md);
+  }
+
+  .location-city {
+    font-size: var(--font-size-md);
+  }
+
+  .weather-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .weather-temperature {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 540px) {
+  .location-card {
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+  }
+}

@@ -42,3 +42,14 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+@media (max-width: 540px) {
+  .search-bar {
+    max-width: 100%;
+    padding: var(--spacing-sm);
+  }
+
+  .search-input {
+    font-size: 14px;
+  }
+}
