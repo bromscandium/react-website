@@ -1,10 +1,10 @@
 import React from "react";
-import { SettingsIcon } from "../icons/SettingsIcon";
+import { GearIcon } from "../icons/GearIcon";
 
 export const SettingsButton = ({ onClick }) => {
   return (
     <button onClick={onClick} aria-label="Settings">
-      <SettingsIcon width={40} height={40} />
+      <GearIcon width={40} height={40} />
     </button>
   );
 };

@@ -1,4 +1,6 @@
 export const getAirQualityText = (aqi) => {
-  const texts = ["Good", "Fair", "Moderate", "Poor", "Very Poor"];
-  return texts[aqi - 1] || "Unknown";
+  if (!aqi) return "Moderate";
+  if (aqi === 1 || aqi === 2) return "Good";
+  if (aqi === 3) return "Moderate";
+  return "Bad";
 };

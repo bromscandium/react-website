@@ -1,7 +1,7 @@
 export const WEATHER_MAP_LAYERS = {
   CLOUDS: { id: "clouds", name: "Clouds" },
   TEMPERATURE: { id: "temp", name: "Temperature" },
-  PRECIPITATION: { id: "precipitation_new", name: "Precipitation" },
+  PRECIPITATION: { id: "precipitation_new", name: "Thunderstorm" },
   WINDSPEED: { id: "wind_new", name: "Wind Speed" },
 };
 

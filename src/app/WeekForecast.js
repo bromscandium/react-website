@@ -1,10 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { ForecastCard } from "../components/cards/ForecastCard";
-import { ArrowLeftIcon } from "../components/icons/ArrowLeftIcon";
-import { ArrowRightIcon } from "../components/icons/ArrowRightIcon";
 import { getForecast } from "../api/openWeather";
-import "./styles/Forecast.css";
+import { ForecastSection } from "../components/sections/ForecastSection";
 
 export const WeekForecast = () => {
   const [searchParams] = useSearchParams();
@@ -12,21 +9,6 @@ export const WeekForecast = () => {
   const city = searchParams.get("city");
   const [forecastData, setForecastData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [itemsPerView, setItemsPerView] = useState(3);
-  const scrollContainerRef = useRef(null);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 768) setItemsPerView(2);
-      else if (window.innerWidth <= 1024) setItemsPerView(3);
-      else setItemsPerView(3);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     if (!city) {
@@ -40,6 +22,7 @@ export const WeekForecast = () => {
 
       if (data?.list) {
         const grouped = {};
+
         data.list.forEach((item) => {
           const date = new Date(item.dt * 1000).toDateString();
           if (!grouped[date]) grouped[date] = [];
@@ -56,7 +39,7 @@ export const WeekForecast = () => {
           }),
         );
 
-        setForecastData(dailyForecasts.slice(0, 5));
+        setForecastData(dailyForecasts.slice(0, 7));
       }
 
       setLoading(false);
@@ -64,25 +47,6 @@ export const WeekForecast = () => {
 
     fetchForecast();
   }, [city, navigate]);
-
-  const scrollToIndex = (index) => {
-    if (!scrollContainerRef.current) return;
-    scrollContainerRef.current.scrollTo({
-      left: index * 170,
-      behavior: "smooth",
-    });
-    setCurrentIndex(index);
-  };
-
-  const scrollLeft = () => scrollToIndex(Math.max(0, currentIndex - 1));
-
-  const scrollRight = () =>
-    scrollToIndex(
-      Math.min(
-        Math.max(0, forecastData.length - itemsPerView),
-        currentIndex + 1,
-      ),
-    );
 
   const formatDay = (timestamp) => {
     const date = new Date(timestamp * 1000);
@@ -103,35 +67,10 @@ export const WeekForecast = () => {
   if (loading) return <div className="forecast-loading">Loading...</div>;
 
   return (
-    <div className="forecast-page">
-      <div className="forecast-container">
-        <button
-          className="forecast-arrow"
-          onClick={scrollLeft}
-          disabled={currentIndex === 0}
-        >
-          <ArrowLeftIcon />
-        </button>
-
-        <div className="forecast-scroll" ref={scrollContainerRef}>
-          {forecastData.map((item) => (
-            <ForecastCard
-              key={item.dt}
-              time={formatDay(item.dt)}
-              icon={item.weather?.[0]?.icon}
-              temp={Math.round(item.main?.temp)}
-            />
-          ))}
-        </div>
-
-        <button
-          className="forecast-arrow"
-          onClick={scrollRight}
-          disabled={currentIndex >= forecastData.length - itemsPerView}
-        >
-          <ArrowRightIcon />
-        </button>
-      </div>
-    </div>
+    <ForecastSection
+      forecastData={forecastData}
+      city={city}
+      formatLabel={formatDay}
+    />
   );
 };

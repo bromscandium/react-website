@@ -1,81 +1,124 @@
-export const getWeatherTip = (weatherData) => {
-  if (!weatherData) return null;
+export const getWeatherTip = (weatherData, units) => {
+  if (!weatherData) return [];
 
+  const tips = [];
   const temp = weatherData.main.temp;
   const feelsLike = weatherData.main.feels_like;
   const humidity = weatherData.main.humidity;
-  const windSpeed = weatherData.wind.speed * 3.6;
+  const windSpeed = weatherData.wind.speed;
   const weatherCondition = weatherData.weather[0].main.toLowerCase();
+
+  const tempForComparison = units === "imperial" ? (temp - 32) * (5 / 9) : temp;
+  const feelsLikeForComparison =
+    units === "imperial" ? (feelsLike - 32) * (5 / 9) : feelsLike;
+  const windSpeedKmh =
+    units === "imperial" ? windSpeed * 1.60934 : windSpeed * 3.6;
+
+  if (weatherCondition.includes("thunderstorm")) {
+    tips.push(
+      "Stay indoors if possible — thunderstorms can be dangerous. Avoid open areas and tall objects. ",
+    );
+  }
+
+  if (weatherCondition.includes("snow")) {
+    tips.push(
+      "Dress in layers and wear waterproof boots — snowy conditions can make roads slippery. ",
+    );
+  }
 
   if (
     weatherCondition.includes("rain") ||
     weatherCondition.includes("drizzle")
   ) {
-    return "Carry a light waterproof jacket — rain showers can pop up suddenly in Košice this time of year.";
-  }
-
-  if (weatherCondition.includes("snow")) {
-    return "Dress in layers and wear waterproof boots — snowy conditions can make roads slippery.";
-  }
-
-  if (weatherCondition.includes("thunderstorm")) {
-    return "Stay indoors if possible — thunderstorms can be dangerous. Avoid open areas and tall objects.";
+    tips.push(
+      "Carry a light waterproof jacket — rain showers can pop up suddenly. ",
+    );
   }
 
   if (weatherCondition.includes("fog") || weatherCondition.includes("mist")) {
-    return "Drive carefully with low beam lights — visibility is reduced in foggy conditions.";
+    tips.push(
+      "Drive carefully with low beam lights — visibility is reduced in foggy conditions. ",
+    );
   }
 
-  if (temp < -10) {
-    return "Extremely cold weather — wear multiple layers, gloves, and a warm hat to protect from frostbite.";
+  if (tempForComparison < -10) {
+    tips.push(
+      "Extremely cold weather — wear multiple layers, gloves, and a warm hat to protect from frostbite. ",
+    );
+  } else if (tempForComparison < 0) {
+    tips.push(
+      "Freezing temperatures — bundle up with a warm coat and watch for icy sidewalks. ",
+    );
+  } else if (tempForComparison < 10) {
+    tips.push(
+      "Chilly weather — a jacket or sweater is recommended, especially in the morning and evening. ",
+    );
   }
 
-  if (temp < 0) {
-    return "Freezing temperatures — bundle up with a warm coat and watch for icy sidewalks.";
+  if (tempForComparison > 30) {
+    tips.push(
+      "Very hot day — stay hydrated, wear light clothing, and avoid prolonged sun exposure. ",
+    );
+  } else if (tempForComparison > 25) {
+    tips.push(
+      "Warm weather — sunscreen and sunglasses are recommended if you'll be outside for a while. ",
+    );
   }
 
-  if (temp < 10) {
-    return "Chilly weather — a jacket or sweater is recommended, especially in the morning and evening.";
-  }
-
-  if (temp > 30) {
-    return "Very hot day — stay hydrated, wear light clothing, and avoid prolonged sun exposure.";
-  }
-
-  if (temp > 25) {
-    return "Warm weather — sunscreen and sunglasses are recommended if you'll be outside for a while.";
-  }
-
-  if (Math.abs(temp - feelsLike) > 5) {
+  if (
+    tips.length < 3 &&
+    Math.abs(tempForComparison - feelsLikeForComparison) > 5
+  ) {
     if (feelsLike < temp) {
-      return `Wind chill makes it feel ${Math.round(feelsLike)}° — dress warmer than the temperature suggests.`;
+      tips.push(
+        "Wind chill makes it feel colder — dress warmer than the temperature suggests. ",
+      );
     } else {
-      return `High humidity makes it feel ${Math.round(feelsLike)}° — it may feel warmer than the actual temperature.`;
+      tips.push(
+        "High humidity makes it feel warmer — it may feel warmer than the actual temperature. ",
+      );
     }
   }
 
-  if (humidity > 80) {
-    return "High humidity today — expect muggy conditions and consider indoor activities.";
+  if (tips.length < 3 && humidity > 80) {
+    tips.push(
+      "High humidity today — expect muggy conditions and consider indoor activities. ",
+    );
   }
 
-  if (windSpeed > 40) {
-    return "Very windy conditions — secure loose objects and be careful when walking outside.";
+  if (tips.length < 3 && windSpeedKmh > 40) {
+    tips.push(
+      "Very windy conditions — secure loose objects and be careful when walking outside. ",
+    );
+  } else if (tips.length < 3 && windSpeedKmh > 25) {
+    tips.push(
+      "Moderate winds expected — hold onto your hat and be careful with umbrellas. ",
+    );
   }
 
-  if (windSpeed > 25) {
-    return "Moderate winds expected — hold onto your hat and be careful with umbrellas.";
-  }
-
-  if (weatherCondition.includes("clear")) {
-    if (temp >= 15 && temp <= 25) {
-      return "Perfect weather for outdoor activities — enjoy the beautiful clear skies!";
+  if (tips.length < 3 && weatherCondition.includes("clear")) {
+    if (tempForComparison >= 15 && tempForComparison <= 25) {
+      tips.push(
+        "Perfect weather for outdoor activities — enjoy the beautiful clear skies! ",
+      );
+    } else {
+      tips.push(
+        "Clear skies today — great visibility for sightseeing and outdoor plans. ",
+      );
     }
-    return "Clear skies today — great visibility for sightseeing and outdoor plans.";
   }
 
-  if (weatherCondition.includes("clouds")) {
-    return "Cloudy conditions — no need for sunglasses, but check back for weather changes.";
+  if (tips.length < 3 && weatherCondition.includes("clouds")) {
+    tips.push(
+      "Cloudy conditions — no need for sunglasses, but check back for weather changes. ",
+    );
   }
 
-  return "Pleasant weather conditions — dress comfortably and enjoy your day!";
+  if (tips.length === 0) {
+    tips.push(
+      "Pleasant weather conditions — dress comfortably and enjoy your day! ",
+    );
+  }
+
+  return tips.slice(0, 3);
 };

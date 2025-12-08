@@ -1,9 +1,8 @@
-import { WEATHER_API_KEY } from "../constants/env";
 import { getUnitsSetting } from "../store/units";
 
 export const getWeather = async (city) => {
   const units = getUnitsSetting();
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${WEATHER_API_KEY}&units=${units}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=${units}`;
 
   const response = await fetch(url);
   if (!response.ok) return null;
@@ -12,7 +11,7 @@ export const getWeather = async (city) => {
 };
 
 export const getAirQuality = async (lat, lon) => {
-  const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}`;
+  const url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`;
 
   const response = await fetch(url);
   if (!response.ok) return null;
@@ -23,7 +22,7 @@ export const getAirQuality = async (lat, lon) => {
 
 export const getForecast = async (city) => {
   const units = getUnitsSetting();
-  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&appid=${WEATHER_API_KEY}&units=${units}`;
+  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=${units}`;
 
   const response = await fetch(url);
   if (!response.ok) return null;
@@ -32,5 +31,5 @@ export const getForecast = async (city) => {
 };
 
 export const getWeatherMapTileUrl = (layer, z, x, y) => {
-  return `https://tile.openweathermap.org/map/${layer}/${z}/${x}/${y}.png?appid=${WEATHER_API_KEY}`;
+  return `https://tile.openweathermap.org/map/${layer}/${z}/${x}/${y}.png?appid=${process.env.REACT_APP_WEATHER_API_KEY}`;
 };

@@ -12,14 +12,13 @@ export const WeatherInfo = ({ wind, humidity, airQuality, windUnit }) => {
     <div className="weather-info">
       <div className="info-item">
         <span className="info-label">Wind:</span>
-        <span className="info-value text-warning">
-          {wind}
-          {windUnit}
+        <span className="info-value">
+          {wind} {windUnit}
         </span>
       </div>
       <div className="info-item">
         <span className="info-label">Humidity:</span>
-        <span className="info-value text-humidity">{humidity}%</span>
+        <span className="info-value">{humidity}%</span>
       </div>
       <div className="info-item">
         <span className="info-label">Air Quality:</span>

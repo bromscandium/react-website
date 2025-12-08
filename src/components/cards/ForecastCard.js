@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { getWeatherIcon } from "../../helpers/weatherIcon";
 import "./styles/ForecastCard.css";
+import { getUnitsSetting, getWindSpeedUnit } from "../../store/units";
 
 export const ForecastCard = ({
   city,
@@ -38,7 +39,9 @@ export const ForecastCard = ({
         </div>
         <div className="forecast-detail">
           <span className="forecast-label">Wind:</span>
-          <span className="forecast-value">{wind} km/h</span>
+          <span className="forecast-value">
+            {wind} {getWindSpeedUnit(getUnitsSetting())}
+          </span>
         </div>
         <div className="forecast-detail">
           <span className="forecast-label">Humidity:</span>

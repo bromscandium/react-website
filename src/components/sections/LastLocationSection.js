@@ -15,13 +15,8 @@ export const LastLocationSection = ({ locations, onSelect, onDelete }) => {
 
   useEffect(() => {
     const updateItems = () => {
-      if (window.innerWidth <= 768) {
-        setItemsPerView(2);
-      } else if (window.innerWidth <= 1024) {
-        setItemsPerView(3);
-      } else {
-        setItemsPerView(3);
-      }
+      if (window.innerWidth <= 768) setItemsPerView(2);
+      else setItemsPerView(3);
     };
 
     updateItems();

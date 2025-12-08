@@ -25,7 +25,7 @@ export const Header = () => {
 
       <div className="header-center">
         {city ? (
-          <CityButton city={city} onClick={() => navigate(-1)} />
+          <CityButton city={city} onClick={() => navigate("/react-website")} />
         ) : (
           <h1 className="header-title">
             {isSettings ? "Settings" : "Weather App"}

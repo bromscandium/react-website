@@ -11,6 +11,7 @@ import { getAirQualityText } from "../helpers/airQuality";
 import { getWeatherIcon } from "../helpers/weatherIcon";
 import { getWeatherTip } from "../helpers/weatherTips";
 import "./styles/Weather.css";
+import { getUnitsSetting, getWindSpeedUnit } from "../store/units";
 
 export const Weather = () => {
   const [searchParams] = useSearchParams();
@@ -24,6 +25,7 @@ export const Weather = () => {
   const [weatherTip, setWeatherTip] = useState(null);
   const navigate = useNavigate();
 
+  const units = getUnitsSetting();
   const city = searchParams.get("city");
   const timestamp = searchParams.get("timestamp");
 
@@ -70,7 +72,7 @@ export const Weather = () => {
 
         setWeatherData(data);
         setLatLon({ lat, lon });
-        setWeatherTip(getWeatherTip(data));
+        setWeatherTip(getWeatherTip(data, units));
 
         const aqi = await getAirQuality(lat, lon);
         setAirQualityData({ aqi, text: getAirQualityText(aqi) });
@@ -100,6 +102,7 @@ export const Weather = () => {
         />
         <WeatherInfo
           wind={Math.round(weatherData.wind.speed * 3.6)}
+          windUnit={getWindSpeedUnit(units)}
           humidity={weatherData.main.humidity}
           airQuality={airQualityData?.text || "N/A"}
         />
@@ -116,7 +119,7 @@ export const Weather = () => {
         isOpen={isDetailsOpen}
         onClose={() => setIsDetailsOpen(false)}
         weatherData={weatherData}
-        airQuality={airQualityData?.text}
+        aqi={airQualityData?.aqi}
       />
 
       <MapModal

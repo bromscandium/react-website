@@ -8,7 +8,7 @@ export const ACTIVITIES = {
   AIR_QUALITY: {
     id: "air_quality",
     name: "Air Quality",
-    icon: "wind-energy",
+    icon: "lungs",
     unit: false,
   },
   HUMIDITY: {
@@ -20,19 +20,19 @@ export const ACTIVITIES = {
   TREE_POLLEN: {
     id: "tree_pollen",
     name: "Tree Pollen",
-    icon: "pollen",
+    icon: "tree",
     unit: false,
   },
   MOLD: {
     id: "mold",
     name: "Mold",
-    icon: "virus",
+    icon: "mask",
     unit: false,
   },
   RUNNING: {
     id: "running",
     name: "Running",
-    icon: "shoes",
+    icon: "shoe",
     unit: false,
   },
   DRIVING: {

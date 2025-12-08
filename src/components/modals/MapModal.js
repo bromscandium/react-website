@@ -13,8 +13,7 @@ export const MapModal = ({ isOpen, onClose, lat, lon, city }) => {
     WEATHER_MAP_LAYERS.CLOUDS.id,
   );
 
-  // eslint-disable-next-line
-  const [lastSelectedLocation, setLastSelectedLocation] = useState(null);
+  const lastSelectedLocationRef = useRef(null);
 
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
@@ -24,7 +23,7 @@ export const MapModal = ({ isOpen, onClose, lat, lon, city }) => {
 
   useEffect(() => {
     if (isOpen && city) {
-      setLastSelectedLocation({ city, lat, lon });
+      lastSelectedLocationRef.current = { city, lat, lon };
     }
   }, [isOpen, city, lat, lon]);
 
@@ -91,7 +90,7 @@ export const MapModal = ({ isOpen, onClose, lat, lon, city }) => {
     WEATHER_MAP_LAYERS.CLOUDS.name;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title={`Map - ${city}`}>
+    <Modal isOpen={isOpen} onClose={onClose} title={"Map"}>
       <div className="map-modal-content">
         <div className="map-container" ref={mapContainerRef}>
           <div className="map-layer-control">
