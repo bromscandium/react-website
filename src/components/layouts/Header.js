@@ -34,7 +34,7 @@ export const Header = () => {
       </div>
 
       <div className="header-right">
-        <LogoButton onClick={() => navigate("/")} />
+        <LogoButton onClick={() => navigate("/react-website")} />
       </div>
     </header>
   );
