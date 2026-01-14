@@ -1,45 +1,31 @@
-# React Website Project
+# React Website
 
-This is a React-based web project.
+React 19 implementation for bachelor thesis framework comparison.
 
-## Installation
+## Tech Stack
 
-Install dependencies:
+- React 19
+- React Router 7
+- Vite
+
+## Scripts
 
 ```bash
-npm install
+npm install     # Install dependencies
+npm run dev     # Development server
+npm run build   # Production build
+npm run deploy  # Deploy to GitHub Pages
 ```
 
-## Development
+## Structure
 
-Start the development server:
-
-```bash
-npm run start
 ```
-
-This will start the app on `http://localhost:3000`.
-
-## Build
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-Deploy to GitHub Pages:
-
-```bash
-npm run deploy
-```
-
-## Code Formatting
-
-Format all source files using Prettier:
-
-```bash
-npm run format
+src/
+├── api/         # API calls
+├── app/         # Page components
+├── components/  # Reusable components
+├── hooks/       # Custom hooks
+├── router/      # Route definitions
+├── store/       # State management
+└── styles/      # CSS styles
 ```
