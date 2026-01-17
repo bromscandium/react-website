@@ -63,8 +63,6 @@ export const LastLocationSection = ({ locations, onSelect, onDelete }) => {
 
   return (
     <div className="last-locations-section">
-      <h2 className="section-title">Last locations:</h2>
-
       <div className="locations-carousel">
         {showArrows && canScrollLeft && (
           <button
